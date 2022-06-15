@@ -1,4 +1,4 @@
-module github.com/billsbook/auth
+module github.com/billsbook/auth_service
 
 go 1.18
 

@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/billsbook/auth/domain"
+import "github.com/billsbook/auth_service/domain"
 
 func ActoreID(id string) domain.ActoreID {
 	switch id[:8] {

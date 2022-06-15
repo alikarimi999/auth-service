@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/billsbook/auth/domain"
+	"github.com/billsbook/auth_service/domain"
 )
 
 type Permission struct {

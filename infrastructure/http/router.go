@@ -1,7 +1,7 @@
 package http
 
 import (
-	"github.com/billsbook/auth/interfaces"
+	"github.com/billsbook/auth_service/interfaces"
 	middlewares "github.com/billsbook/common/middleware"
 	"github.com/gin-gonic/gin"
 )

@@ -1,8 +1,8 @@
 package httpserver
 
 import (
-	"github.com/billsbook/auth/app"
-	"github.com/billsbook/auth/interfaces"
+	"github.com/billsbook/auth_service/app"
+	"github.com/billsbook/auth_service/interfaces"
 )
 
 type httpServer struct {

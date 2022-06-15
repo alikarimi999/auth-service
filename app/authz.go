@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/billsbook/auth/domain"
+	"github.com/billsbook/auth_service/domain"
 )
 
 func (a *Application) NewActore(actore domain.Actor, ctx context.Context) error {

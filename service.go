@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/billsbook/auth/app"
-	"github.com/billsbook/auth/infrastructure/database"
-	"github.com/billsbook/auth/infrastructure/http"
-	httpserver "github.com/billsbook/auth/interfaces/http"
+	"github.com/billsbook/auth_service/app"
+	"github.com/billsbook/auth_service/infrastructure/database"
+	"github.com/billsbook/auth_service/infrastructure/http"
+	httpserver "github.com/billsbook/auth_service/interfaces/http"
 )
 
 func main() {

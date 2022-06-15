@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/billsbook/auth/domain"
-	"github.com/billsbook/auth/infrastructure/database/dto"
+	"github.com/billsbook/auth_service/domain"
+	"github.com/billsbook/auth_service/infrastructure/database/dto"
 	"github.com/billsbook/common"
 )
 

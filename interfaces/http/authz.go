@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/billsbook/auth/interfaces"
-	dto "github.com/billsbook/auth/interfaces/dto/http"
+	"github.com/billsbook/auth_service/interfaces"
+	dto "github.com/billsbook/auth_service/interfaces/dto/http"
 )
 
 func (h *httpServer) CheckAccess(ctx interfaces.ServerContext) {

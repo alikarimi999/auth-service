@@ -4,7 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 
-	"github.com/billsbook/auth/domain"
+	"github.com/billsbook/auth_service/domain"
 	"gorm.io/gorm"
 )
 
