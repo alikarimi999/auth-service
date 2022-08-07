@@ -3,21 +3,24 @@ package domain
 type Resource int
 
 const (
-	Products Resource = iota
-	Plans
-	Subscriptions
+	Orders Resource = iota
 )
 
 func (r Resource) String() string {
 	switch r {
-	case Products:
-		return "products"
-	case Plans:
-		return "plans"
-	case Subscriptions:
-		return "subscriptions"
+	case Orders:
+		return "orders"
 	default:
 		return ""
+	}
+}
+
+func ParseResource(s string) Resource {
+	switch s {
+	case "orders":
+		return Orders
+	default:
+		return -1
 	}
 }
 
@@ -40,18 +43,25 @@ func (a Action) String() string {
 	}
 }
 
+func ParseAction(s string) Action {
+	switch s {
+	case "read":
+		return Read
+	case "write":
+		return Write
+	default:
+		return None
+	}
+}
+
 type ActoreType int
 
 const (
-	Token ActoreType = iota // APIToken struct
-	Acc                     // Account struct
+	Token   ActoreType = iota // APIToken struct
+	Account                   // Account struct
 )
 
 type Permission struct {
 	Resource Resource
 	Action   Action
-}
-
-type Tenat struct {
-	ID string
 }

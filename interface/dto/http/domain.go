@@ -2,23 +2,10 @@ package dto
 
 import "github.com/billsbook/auth_service/domain"
 
-func ActoreID(id string) domain.ActoreID {
-	switch id[:8] {
-	case "api_key_":
-		return &domain.TokenID{ApiKey: id[8:]}
-	default:
-		return &domain.AccountID{User: id}
-	}
-}
-
 func Resource(res string) domain.Resource {
 	switch res {
-	case "plans":
-		return domain.Plans
-	case "products":
-		return domain.Products
-	case "subscriptions":
-		return domain.Subscriptions
+	case "orders":
+		return domain.Orders
 	default:
 		return -1
 	}
