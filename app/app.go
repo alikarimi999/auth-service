@@ -1,6 +1,6 @@
 package app
 
-import "github.com/billsbook/auth_service/domain"
+import "github.com/alikarimi999/auth_service/domain"
 
 type Application struct {
 	repo      domain.AuthRepo

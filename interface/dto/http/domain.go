@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/billsbook/auth_service/domain"
+import "github.com/alikarimi999/auth_service/domain"
 
 func Resource(res string) domain.Resource {
 	switch res {

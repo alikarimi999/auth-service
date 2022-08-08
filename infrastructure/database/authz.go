@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/billsbook/auth_service/domain"
-	"github.com/billsbook/auth_service/infrastructure/database/dto"
+	"github.com/alikarimi999/auth_service/domain"
+	"github.com/alikarimi999/auth_service/infrastructure/database/dto"
 	"gorm.io/gorm"
 )
 

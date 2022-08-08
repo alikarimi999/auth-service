@@ -1,7 +1,7 @@
 package http
 
 import (
-	httpserver "github.com/billsbook/auth_service/interface/http"
+	httpserver "github.com/alikarimi999/auth_service/interface/http"
 
 	"github.com/gin-gonic/gin"
 )

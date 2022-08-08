@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/alikarimi999/auth_service/domain"
+	interfaces "github.com/alikarimi999/auth_service/interface"
+	dto "github.com/alikarimi999/auth_service/interface/dto/http"
 	"github.com/alikarimi999/errors"
-	"github.com/billsbook/auth_service/domain"
-	interfaces "github.com/billsbook/auth_service/interface"
-	dto "github.com/billsbook/auth_service/interface/dto/http"
 )
 
 func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {

@@ -3,8 +3,8 @@ package httpserver
 import (
 	"net/http"
 
+	interfaces "github.com/alikarimi999/auth_service/interface"
 	"github.com/alikarimi999/errors"
-	interfaces "github.com/billsbook/auth_service/interface"
 )
 
 func handlerErr(ctx interfaces.ServerContext, err error) {

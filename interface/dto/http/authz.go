@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/alikarimi999/auth_service/domain"
 	"github.com/alikarimi999/errors"
-	"github.com/billsbook/auth_service/domain"
 )
 
 type Permission struct {

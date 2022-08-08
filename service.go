@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/billsbook/auth_service/app"
-	"github.com/billsbook/auth_service/infrastructure/database"
-	"github.com/billsbook/auth_service/infrastructure/http"
-	httpserver "github.com/billsbook/auth_service/interface/http"
+	"github.com/alikarimi999/auth_service/app"
+	"github.com/alikarimi999/auth_service/infrastructure/database"
+	"github.com/alikarimi999/auth_service/infrastructure/http"
+	httpserver "github.com/alikarimi999/auth_service/interface/http"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

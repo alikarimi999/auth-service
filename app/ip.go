@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/alikarimi999/auth_service/domain"
 	"github.com/alikarimi999/errors"
-	"github.com/billsbook/auth_service/domain"
 )
 
 func (a *Application) AddIp(id, ip string, t domain.ActoreType, ctx context.Context) error {

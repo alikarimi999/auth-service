@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	interfaces "github.com/billsbook/auth_service/interface"
-	dto "github.com/billsbook/auth_service/interface/dto/http"
+	interfaces "github.com/alikarimi999/auth_service/interface"
+	dto "github.com/alikarimi999/auth_service/interface/dto/http"
 )
 
 func (h *HttpServer) AddIp(ctx interfaces.ServerContext) {
