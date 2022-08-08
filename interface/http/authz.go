@@ -41,36 +41,62 @@ func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {
 		UserId: actore.UserId(),
 	}
 
-	for _, i := range actore.IPs() {
-		if req.Ip == i {
-			perm, ok := actore.Permissions()[domain.ParseResource(req.Resource)]
-			if !ok {
-				handlerErr(ctx, errors.Wrap(errors.ErrNotFound, errors.NewMesssage("resource not found")))
-				return
-			}
+	if req.CheckIp {
+		for _, i := range actore.IPs() {
+			if req.Ip == i {
+				perm, ok := actore.Permissions()[domain.ParseResource(req.Resource)]
+				if !ok {
+					handlerErr(ctx, errors.Wrap(errors.ErrNotFound, errors.NewMesssage("resource not found")))
+					return
+				}
 
-			switch domain.ParseAction(req.Action) {
-			case domain.None:
-				resp.HasAccess = true
-				ctx.JSON(http.StatusOK, resp)
-				return
-			case domain.Read:
-				resp.HasAccess = perm.Action == domain.Read || perm.Action == domain.Write
-				ctx.JSON(http.StatusOK, resp)
-				return
-			case domain.Write:
-				resp.HasAccess = perm.Action == domain.Write
-				ctx.JSON(http.StatusOK, resp)
-				return
-			default:
-				handlerErr(ctx, errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid action")))
-				return
+				switch domain.ParseAction(req.Action) {
+				case domain.None:
+					resp.HasAccess = true
+					ctx.JSON(http.StatusOK, resp)
+					return
+				case domain.Read:
+					resp.HasAccess = perm.Action == domain.Read || perm.Action == domain.Write
+					ctx.JSON(http.StatusOK, resp)
+					return
+				case domain.Write:
+					resp.HasAccess = perm.Action == domain.Write
+					ctx.JSON(http.StatusOK, resp)
+					return
+				default:
+					handlerErr(ctx, errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid action")))
+					return
+				}
 			}
 		}
-	}
 
-	resp.HasAccess = false
-	resp.Msg = "ip not found"
+		resp.HasAccess = false
+		resp.Msg = "ip not found"
+	} else {
+		perm, ok := actore.Permissions()[domain.ParseResource(req.Resource)]
+		if !ok {
+			handlerErr(ctx, errors.Wrap(errors.ErrNotFound, errors.NewMesssage("resource not found")))
+			return
+		}
+
+		switch domain.ParseAction(req.Action) {
+		case domain.None:
+			resp.HasAccess = true
+			ctx.JSON(http.StatusOK, resp)
+			return
+		case domain.Read:
+			resp.HasAccess = perm.Action == domain.Read || perm.Action == domain.Write
+			ctx.JSON(http.StatusOK, resp)
+			return
+		case domain.Write:
+			resp.HasAccess = perm.Action == domain.Write
+			ctx.JSON(http.StatusOK, resp)
+			return
+		default:
+			handlerErr(ctx, errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid action")))
+			return
+		}
+	}
 	ctx.JSON(http.StatusOK, resp)
 	return
 }

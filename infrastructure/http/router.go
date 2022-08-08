@@ -15,6 +15,7 @@ func (r *Router) Run(addr ...string) {
 }
 
 func NewRouter(si *httpserver.HttpServer) *Router {
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 	a := r.Group("/actores")
 	a.POST("/access", func(ctx *gin.Context) { si.CheckAccess(NewContext(ctx)) })

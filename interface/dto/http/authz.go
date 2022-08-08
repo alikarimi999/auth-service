@@ -16,6 +16,7 @@ type Permission struct {
 type CheckAccessRequest struct {
 	Id       string `json:"id"`
 	Ip       string `json:"ip"`
+	CheckIp  bool   `json:"check_ip"`
 	Resource string `json:"resource"`
 	Action   string `json:"action"`
 }
@@ -25,14 +26,15 @@ func (r *CheckAccessRequest) Validate() error {
 		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("id is required"))
 	}
 
-	if r.Ip == "" {
-		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("ip is required"))
-	}
+	if r.CheckIp == true {
+		if r.Ip == "" {
+			return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("ip is required"))
+		}
 
-	if !isValidIP(r.Ip) {
-		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid ip"))
+		if !isValidIP(r.Ip) {
+			return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid ip"))
+		}
 	}
-
 	if r.Resource == "" {
 		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("resource is required"))
 	}
@@ -70,7 +72,7 @@ type CheckAccessResp struct {
 	Id        string `json:"id"`
 	UserId    int64  `json:"user_id"`
 	HasAccess bool   `json:"has_access"`
-	Msg       string `json:"msg"`
+	Msg       string `json:"msg,omitempty"`
 }
 
 type CreateActoreReq struct {
@@ -82,14 +84,6 @@ type CreateActoreReq struct {
 func (r *CreateActoreReq) Validate() error {
 	if r.UserId == 0 {
 		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("user_id is required"))
-	}
-
-	if len(r.Ips) == 0 {
-		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("ips is required"))
-	}
-
-	if len(r.Perms) == 0 {
-		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("at least one permission is required"))
 	}
 
 	// check if ips are valid

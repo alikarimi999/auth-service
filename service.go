@@ -26,5 +26,6 @@ func main() {
 	app := app.NewApp(repo)
 	si := httpserver.NewServer(app)
 	router := http.NewRouter(si)
+	fmt.Println("starting server on port 9091")
 	router.Run(":9091")
 }
