@@ -30,17 +30,20 @@ func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {
 		return
 	}
 
+	resp := dto.CheckAccessResp{Id: req.Id}
 	actore, err := h.App.GetActore(hashId(id), at, ctx.Request().Context())
 	if err != nil {
+		if errors.ErrorCode(err) == errors.ErrNotFound {
+			resp.HasAccess = false
+			resp.Msg = fmt.Sprintf("token `%s`not found", id)
+			ctx.JSON(http.StatusOK, resp)
+			return
+		}
 		handlerErr(ctx, err)
 		return
 	}
 
-	resp := dto.CheckAccessResp{
-		Id:     req.Id,
-		UserId: actore.UserId(),
-	}
-
+	resp.UserId = actore.UserId()
 	if req.CheckIp {
 		for _, i := range actore.IPs() {
 			if req.Ip == i {
@@ -51,16 +54,20 @@ func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {
 				}
 
 				switch domain.ParseAction(req.Action) {
-				case domain.None:
-					resp.HasAccess = true
-					ctx.JSON(http.StatusOK, resp)
-					return
 				case domain.Read:
-					resp.HasAccess = perm.Action == domain.Read || perm.Action == domain.Write
+					ok := perm.Action == domain.Read || perm.Action == domain.Write
+					resp.HasAccess = ok
+					if !ok {
+						resp.Msg = fmt.Sprintf("action `%s` not allowed for this token", req.Action)
+					}
 					ctx.JSON(http.StatusOK, resp)
 					return
 				case domain.Write:
-					resp.HasAccess = perm.Action == domain.Write
+					ok := perm.Action == domain.Write
+					resp.HasAccess = ok
+					if !ok {
+						resp.Msg = fmt.Sprintf("action `%s` not allowed for this token", req.Action)
+					}
 					ctx.JSON(http.StatusOK, resp)
 					return
 				default:
@@ -71,7 +78,7 @@ func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {
 		}
 
 		resp.HasAccess = false
-		resp.Msg = "ip not found"
+		resp.Msg = fmt.Sprintf("ip `%s` not found", req.Ip)
 	} else {
 		perm, ok := actore.Permissions()[domain.ParseResource(req.Resource)]
 		if !ok {

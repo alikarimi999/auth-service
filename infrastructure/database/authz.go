@@ -2,10 +2,10 @@ package database
 
 import (
 	"context"
-	"errors"
 
 	"github.com/alikarimi999/auth_service/domain"
 	"github.com/alikarimi999/auth_service/infrastructure/database/dto"
+	"github.com/alikarimi999/errors"
 	"gorm.io/gorm"
 )
 
@@ -22,6 +22,9 @@ func (az *AuthZDB) GetActore(id string, t domain.ActoreType, ctx context.Context
 	case domain.Token:
 		token := dto.ApiToken{}
 		if err := az.db.Where(" id = ?", id).First(&token).Error; err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return nil, errors.Wrap(errors.ErrNotFound)
+			}
 			return nil, err
 		}
 		return token.Map(), nil
