@@ -6,5 +6,5 @@ COPY . /app/
 WORKDIR /app
 # run the app
 # RUN go mod tidy; go build -o application
-RUN apk add gcompat; chmod +x auth_service
+RUN  chmod +x auth_service
 CMD ["./auth_service" ]
