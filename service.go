@@ -24,7 +24,7 @@ func test() {
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(fmt.Sprintf("failed to connect to %s", dsn))
+		panic("failed to connect to mysql")
 	}
 
 	repo := database.NewAuthzDB(db)
@@ -42,7 +42,7 @@ func production() {
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(fmt.Sprintf("failed to connect to %s", dsn))
+		panic("failed to connect to mysql")
 	}
 
 	repo := database.NewAuthzDB(db)
@@ -51,5 +51,5 @@ func production() {
 	si := httpserver.NewServer(app)
 	router := http.NewRouter(si)
 	fmt.Println("starting server on port 9091")
-	router.Run(":9091")
+	router.Run(":8000")
 }

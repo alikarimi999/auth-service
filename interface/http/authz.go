@@ -78,7 +78,7 @@ func (h *HttpServer) CheckAccess(ctx interfaces.ServerContext) {
 		}
 
 		resp.HasAccess = false
-		resp.Msg = fmt.Sprintf("ip `%s` not found", req.Ip)
+		resp.Msg = "invalid ip"
 	} else {
 		perm, ok := actore.Permissions()[domain.ParseResource(req.Resource)]
 		if !ok {

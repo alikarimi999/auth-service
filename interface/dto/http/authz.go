@@ -26,13 +26,13 @@ func (r *CheckAccessRequest) Validate() error {
 		return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("id is required"))
 	}
 
-	if r.CheckIp == true {
+	if r.CheckIp {
 		if r.Ip == "" {
 			return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("ip is required"))
 		}
 
 		if !isValidIP(r.Ip) {
-			return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage("invalid ip"))
+			return errors.Wrap(errors.ErrBadRequest, errors.NewMesssage(fmt.Sprintf("invalid ip %s", r.Ip)))
 		}
 	}
 	if r.Resource == "" {
